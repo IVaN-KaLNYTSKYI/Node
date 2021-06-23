@@ -23,8 +23,6 @@ function fileRead(pathFile) {
         value.map(file => {
             let valueGender = require(path.join(pathFile, file));
 
-            creatDir()
-
             valueGender.gender === 'male' ?
                 fs.rename(path.join(pathFile, file), path.join(__dirname, 'boys', file), err1 => {
                     if (err1) console.log(err1);
@@ -37,6 +35,7 @@ function fileRead(pathFile) {
     })
 }
 
+creatDir()
 fileRead(filePath18);
 fileRead(filePath20);
 
