@@ -18,9 +18,6 @@ app.engine('.hbs', expressHbs({
 
 const pathFile = path.join(__dirname, 'db', 'db.json');
 
-const data = fs.readFileSync(pathFile);
-const allUsers = JSON.parse(data.toString());
-
 /*let dataFile=null
 fs.readFile(pathFile, (err, data) => {
     if (err) {
@@ -32,6 +29,8 @@ fs.readFile(pathFile, (err, data) => {
 const allUsers = dataFile;*/
 
 app.get('/users', (req, res) => {
+    const data = fs.readFileSync(pathFile);
+    const allUsers = JSON.parse(data.toString());
     res.render('users', {allUsers});
 });
 
@@ -47,15 +46,19 @@ app.get('/error', (req, res) => {
     res.render('error');
 });
 
-app.get('/user/:userEmail', (req, res) => {
-    const {userEmail} = req.params;
-    const user = allUsers.find((value => value.email === userEmail));
+app.get('/users/:userId', (req, res) => {
+    const {userId} = req.params;
+    const data = fs.readFileSync(pathFile);
+    const allUsers = JSON.parse(data.toString());
+    const user = allUsers.find((value => value.email === userId));
 
     res.render('user', {user});
 });
 
 app.post('/register', (req, res) => {
     const {email} = req.body;
+    const data = fs.readFileSync(pathFile);
+    const allUsers = JSON.parse(data.toString());
     const flag = allUsers.some((value => value.email === email));
 
     if (flag) {
@@ -76,13 +79,15 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
     const {email, password} = req.body;
-    const flag = allUsers.some((value => value.email === email && value.password === password));
-    const user = allUsers.find((value => value.email === email));
+    const data = fs.readFileSync(pathFile);
+    const allUsers = JSON.parse(data.toString());
+    const user = allUsers.find((value => value.email === email && value.password === password));
 
-    if (flag) {
-        res.redirect(`/user/${user.email}`);
+    if (user) {
+        res.redirect(`/users/${user.email}`);
         return;
     }
+
     res.redirect('/register');
 
 });
