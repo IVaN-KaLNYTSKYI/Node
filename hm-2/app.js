@@ -25,7 +25,7 @@ const allUsers = JSON.parse(data.toString());
 fs.readFile(pathFile, (err, data) => {
     if (err) {
         console.log(err);
-        return;                             // так не працює чогось
+        return;                             // так не працює чогось тут напевно потрібно через async,await
     }
     dataFile = JSON.parse(data.toString())
 })
