@@ -21,7 +21,7 @@ app.engine('.hbs', expressHbs({
 const pathFile = path.join(__dirname, 'db', 'db.json');
 
 const data=fs.readFileSync(pathFile);
-const allUsers = JSON.parse(data.toString())
+const allUsers = JSON.parse(data.toString());
 
 /*let dataFile=null
 
