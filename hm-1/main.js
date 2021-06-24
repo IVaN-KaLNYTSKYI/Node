@@ -26,7 +26,7 @@ function fileRead(pathFile) {
     })
 }
 
-creatDir()
+creatDir();
 fileRead(filePath18);
 fileRead(filePath20);
 
