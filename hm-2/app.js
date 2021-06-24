@@ -18,16 +18,6 @@ app.engine('.hbs', expressHbs({
 
 const pathFile = path.join(__dirname, 'db', 'db.json');
 
-/*let dataFile=null
-fs.readFile(pathFile, (err, data) => {
-    if (err) {
-        console.log(err);
-        return;                             // так не працює чогось тут напевно потрібно через async,await
-    }
-    dataFile = JSON.parse(data.toString())
-})
-const allUsers = dataFile;*/
-
 app.get('/users', (req, res) => {
     const data = fs.readFileSync(pathFile);
     const allUsers = JSON.parse(data.toString());
